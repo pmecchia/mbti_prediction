@@ -1,14 +1,11 @@
 import numpy as np
 from flask import Flask,render_template,request
 import joblib
+from tools import *
 
 
 app = Flask(__name__)
 
-pred_EI=joblib.load('models/model_EI.joblib')
-pred_NS=joblib.load('models/model_NS.joblib')
-pred_TF=joblib.load('models/model_TF.joblib')
-pred_PJ=joblib.load('models/model_PJ.joblib')
 
 
 @app.route('/')
@@ -17,13 +14,18 @@ def home():
 
 @app.route('/predict', methods=['POST'])
 def predict():
-    text_post = request.get_json()
-    print(text_post)
 
-    result_IE = pred_EI.predict(text_post)
-    result_NS = pred_NS.predict(text_post)
-    result_TF = pred_TF.predict(text_post)
-    result_PJ = pred_PJ.predict(text_post)
+    text_post = request.form.get('post')
 
-    type = result_IE[0]+result_NS[0]+result_TF[0]+result_PJ[0]
-    return render_template('index.html', prediction_text='MBTY type: $ {}'.format(type))
+    clean_post = list(cleanData(text_post))
+    clean_post=[clean_post]
+    type = type_prediction(clean_post,model_EI,model_NS,model_TF,model_PJ)
+
+    return render_template('index.html', prediction_text='MBTI type: {}'.format(type))
+
+if __name__ == '__main__':
+    model_EI=joblib.load('models/model_EI.joblib')
+    model_NS=joblib.load('models/model_NS.joblib')
+    model_TF=joblib.load('models/model_TF.joblib')
+    model_PJ=joblib.load('models/model_PJ.joblib')
+    app.run(debug=True)
