@@ -5,16 +5,16 @@
   <meta charset="UTF-8">
   <title>MBTI Prediction</title>
 
-<link rel="stylesheet" href="{{ url_for('static', filename='../static/style.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
 </head>
 
-<body style="background: #000;">
- <div class="login">
+<body >
+ <div class="form">
 	<h1>MBTI Prediction</h1>
 
     <form action="{{ url_for('predict')}}"method="post">
-    	<input type="text" name="post" placeholder="Describe yourself" required="required" />
+    	<textarea type="text" name="post" placeholder="Describe yourself" required="required"></textarea>
       <button type="submit" class="btn btn-primary btn-block btn-large">Type prediction</button>
     </form>
 
