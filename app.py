@@ -17,7 +17,7 @@ def predict():
 
     text_post = request.form.get('post')
 
-    clean_post = list(cleanData(text_post))
+    clean_post = cleanData(text_post)
     clean_post=[clean_post]
     type = type_prediction(clean_post,model_EI,model_NS,model_TF,model_PJ)
 
