@@ -22,7 +22,7 @@ Once the web application is launched, the user should write the largest descript
  1. Clone the repo
  
 ```
-git clone https://github.com/your_username_/Project-Name.git
+git clone https://github.com/pmecchia/mbti_prediction.git
 ```
 
  2. Download and Install dependencies
